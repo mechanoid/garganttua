@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Garganttua Chart Demo</title>
+    <link rel="stylesheet" href="../garganttua.css" />
+
+    <script src="//unpkg.com/@ungap/custom-elements/es.js" defer></script>
+    <script src="../garganttua.js" type="module"></script>
+  </head>
+  <body>
+    <h1>Garganttua Chart Demo</h1>
+
+    <garganttua-gantt-chart days="130">
+      <ul is="garganttua-task-list">
+        <li is="garganttua-task">
+          <garganttua-gantt-grid>
+            <p is="garganttua-task-description">Some Task</p>
+            <garganttua-gantt-task-schedule start="5" end="15"></garganttua-gantt-task-schedule>
+          </garganttua-gantt-grid>
+        </li>
+        <li is="garganttua-task">
+          <garganttua-gantt-grid>
+            <p is="garganttua-task-description">Some Other Task</p>
+            <garganttua-gantt-task-schedule start="25" end="150"></garganttua-gantt-task-schedule>
+          </garganttua-gantt-grid>
+        </li>
+        <li is="garganttua-task-group">
+          <garganttua-gantt-grid>
+            <p is="garganttua-task-description">Some Task Group</p>
+            <!-- TODO: the task-schedules of the group should be derived from the children -->
+            <garganttua-gantt-task-schedule start="5" end="10"></garganttua-gantt-task-schedule>
+            <garganttua-gantt-task-schedule start="15" end="50"></garganttua-gantt-task-schedule>
+          </garganttua-gantt-grid>
+
+          <ul is="garganttua-task-list">
+            <li is="garganttua-task">
+              <garganttua-gantt-grid>
+                <p is="garganttua-task-description">Some Sub Task</p>
+                <garganttua-gantt-task-schedule start="5" end="10"></garganttua-gantt-task-schedule>
+              </garganttua-gantt-grid>
+            </li>
+            <li is="garganttua-task-group">
+              <garganttua-gantt-grid>
+                <p is="garganttua-task-description">Some Task Group</p>
+                <!-- TODO: the task-schedules of the group should be derived from the children -->
+                <garganttua-gantt-task-schedule start="5" end="10"></garganttua-gantt-task-schedule>
+                <garganttua-gantt-task-schedule start="15" end="50"></garganttua-gantt-task-schedule>
+              </garganttua-gantt-grid>
+
+              <ul is="garganttua-task-list">
+                <li is="garganttua-task">
+                  <garganttua-gantt-grid>
+                    <p is="garganttua-task-description">Some Sub Task</p>
+                    <garganttua-gantt-task-schedule start="5" end="10"></garganttua-gantt-task-schedule>
+                  </garganttua-gantt-grid>
+                </li>
+                <li is="garganttua-task">
+                  <garganttua-gantt-grid>
+                    <p is="garganttua-task-description">Another Sub Task</p>
+                    <garganttua-gantt-task-schedule start="7" end="50"></garganttua-gantt-task-schedule>
+                  </garganttua-gantt-grid>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </garganttua-gantt-chart>
+  </body>
+</html>
+
+<!-- Open ToDos: -->
+<!-- TODO: make groups collapsible -->
+<!-- TODO: generate day description on top of the list -->
+<!-- TODO: generate month description on top of the list -->
+<!-- TODO: allow different task states
+      Resulting in:
+        * different colors for the schedules -->
+<!-- TODO: generate task numbers, including group numbering and group prefixes for tasks
+      Exmpl:
+        1. Task Group
+        1.1 Task 1
+        1.2 Task 2
+        2. Task 3 -->

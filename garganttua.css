@@ -1,0 +1,57 @@
+/* base setup and resetting */
+:root {
+  /* task description */
+  --task-description-min-width: 10em;
+
+  /* task schedule */
+  --task-schedule-bg-col: rgb(102, 125, 140);
+  --task-schedule-border-radius: 3px;
+
+  /* task list */
+  --task-gap: .3em; /* defines the vertical gap between two tasks */
+}
+
+garganttua-gantt-chart {
+  box-sizing: border-box;
+}
+
+garganttua-gantt-chart ul, garganttua-gantt-chart li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+  grid setup for tasks and schedules
+
+  Required Properties:
+    --day-count: defines the available grid columns a task can be assigned to
+    --schedule-start: defines the column for the schedule to start
+    --schedule-end: defines the column for the schedule to end
+*/
+garganttua-gantt-grid {
+  display: grid;
+  justify-items: stretch;
+  grid-template-columns: minmax(var(--task-description-min-width),1fr) repeat(var(--day-count), 3em);
+}
+
+garganttua-gantt-task-schedule {
+  background-color: var(--task-schedule-bg-col);
+  border-radius: var(--task-schedule-border-radius);
+
+  grid-column-start: var(--schedule-start);
+  grid-column-end: var(--schedule-end);
+}
+
+[is=garganttua-task] {
+  margin-bottom: var(--task-gap);
+}
+
+[is=garganttua-task]:last-of-type {
+  margin-bottom: 0;
+}
+
+/* handling of task groups */
+[is=garganttua-task-group] > garganttua-gantt-grid + [is=garganttua-task-list] {
+  margin-top: var(--task-gap);
+}
