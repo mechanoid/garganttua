@@ -1,12 +1,12 @@
-/* global customElements, HTMLElement */
-
-class GarganttuaGanttChart extends HTMLElement {
+/* global customElements, HTMLElement, HTMLLIElement, HTMLButtonElement */
+class GanttChart extends HTMLElement {
   connectedCallback () {
     this.provideConfigAsCSSProps()
   }
 
   provideConfigAsCSSProps () {
     this.style.setProperty('--day-count', this.days)
+    this.style.setProperty('--group-children-visibility', this.groups === 'collapsed' ? 'hidden' : 'visible')
   }
 
   get days () {
@@ -16,9 +16,14 @@ class GarganttuaGanttChart extends HTMLElement {
     }
     return days
   }
+
+  get groups () {
+    const groups = this.getAttribute('groups')
+    return ['collapsed', 'expanded'].includes(groups) ? groups : 'expanded'
+  }
 }
 
-class GarganttuaTaskSchedule extends HTMLElement {
+class TaskSchedule extends HTMLElement {
   connectedCallback () {
     this.provideConfigAsCSSProps()
   }
@@ -39,5 +44,71 @@ class GarganttuaTaskSchedule extends HTMLElement {
   }
 }
 
-customElements.define('garganttua-gantt-chart', GarganttuaGanttChart)
-customElements.define('garganttua-gantt-task-schedule', GarganttuaTaskSchedule)
+class Toggle extends HTMLButtonElement {
+  get active () {
+    return this.activeLabel
+  }
+
+  get inactive () {
+    return this.inactiveLabel
+  }
+
+  set active (label) {
+    this.activeLabel = label
+  }
+
+  set inactive (label) {
+    this.inactiveLabel = label
+  }
+
+  activate () {
+    this.innerText = this.active
+  }
+
+  deactivate () {
+    this.innerText = this.inactive
+  }
+
+  static build (activeLabel, inactiveLabel) {
+    const button = document.createElement('button', { is: 'garganttua-group-toggle' })
+    button.active = activeLabel
+    button.inactive = inactiveLabel
+    button.innerText = activeLabel
+    return button
+  }
+}
+
+class TaskGroup extends HTMLLIElement {
+  connectedCallback () {
+    this.groupGrid = this.querySelector(':scope > garganttua-gantt-grid')
+    this.subList = this.querySelector(':scope > [is=garganttua-task-list]')
+    if (this.subList) {
+      this.attachToggles()
+    }
+  }
+
+  attachToggles () {
+    const groupGridDescription = this.groupGrid.querySelector('p')
+    this.groupChildrenToggle = Toggle.build('show', 'hide')
+    console.log(this.groupChildrenToggle)
+    this.groupChildrenToggle.addEventListener('click', e => {
+      e.preventDefault()
+      const currentVisibility = this.subList.style.getPropertyValue('visibility')
+
+      if (currentVisibility === 'visible') {
+        this.subList.style.setProperty('visibility', 'hidden')
+        this.groupChildrenToggle.activate()
+      } else {
+        this.subList.style.setProperty('visibility', 'visible')
+        this.groupChildrenToggle.deactivate()
+      }
+    })
+
+    groupGridDescription.after(this.groupChildrenToggle)
+  }
+}
+
+customElements.define('garganttua-gantt-chart', GanttChart)
+customElements.define('garganttua-gantt-task-schedule', TaskSchedule)
+customElements.define('garganttua-task-group', TaskGroup, { extends: 'li' })
+customElements.define('garganttua-group-toggle', Toggle, { extends: 'button' })

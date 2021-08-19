@@ -51,7 +51,16 @@ garganttua-gantt-task-schedule {
   margin-bottom: 0;
 }
 
-/* handling of task groups */
+/*
+  handling of task groups
+
+  Required Properties:
+    --group-children-visibility: initial visibility of sub tasks (all visible or all hidden)
+*/
 [is=garganttua-task-group] > garganttua-gantt-grid + [is=garganttua-task-list] {
   margin-top: var(--task-gap);
+}
+
+[is=garganttua-task-group] [is=garganttua-task-list] {
+  visibility: var(--group-children-visibility);
 }

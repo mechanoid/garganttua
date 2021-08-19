@@ -13,7 +13,7 @@
   <body>
     <h1>Garganttua Chart Demo</h1>
 
-    <garganttua-gantt-chart days="130">
+    <garganttua-gantt-chart days="130" groups="collapsed">
       <ul is="garganttua-task-list">
         <li is="garganttua-task">
           <garganttua-gantt-grid>
@@ -44,7 +44,7 @@
             </li>
             <li is="garganttua-task-group">
               <garganttua-gantt-grid>
-                <p is="garganttua-task-description">Some Task Group</p>
+                <p is="garganttua-group-description">Some Task Group</p>
                 <!-- TODO: the task-schedules of the group should be derived from the children -->
                 <garganttua-gantt-task-schedule start="5" end="10"></garganttua-gantt-task-schedule>
                 <garganttua-gantt-task-schedule start="15" end="50"></garganttua-gantt-task-schedule>
@@ -53,7 +53,7 @@
               <ul is="garganttua-task-list">
                 <li is="garganttua-task">
                   <garganttua-gantt-grid>
-                    <p is="garganttua-task-description">Some Sub Task</p>
+                    <p is="garganttua-group-description">Some Sub Task</p>
                     <garganttua-gantt-task-schedule start="5" end="10"></garganttua-gantt-task-schedule>
                   </garganttua-gantt-grid>
                 </li>
