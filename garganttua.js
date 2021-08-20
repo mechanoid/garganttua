@@ -1,4 +1,5 @@
 /* global customElements, HTMLElement, HTMLLIElement, HTMLButtonElement */
+
 class GanttChart extends HTMLElement {
   connectedCallback () {
     this.provideConfigAsCSSProps()
@@ -20,6 +21,10 @@ class GanttChart extends HTMLElement {
   get groups () {
     const groups = this.getAttribute('groups')
     return ['collapsed', 'expanded'].includes(groups) ? groups : 'expanded'
+  }
+
+  get src () {
+    return this.getAttribute('src')
   }
 }
 
@@ -74,6 +79,7 @@ class Toggle extends HTMLButtonElement {
     button.active = activeLabel
     button.inactive = inactiveLabel
     button.innerText = activeLabel
+    // the button is properly created, but we let's add the `is` attribute, so that we can find the button in the dom.
     button.setAttribute('is', 'garganttua-group-toggle')
     return button
   }

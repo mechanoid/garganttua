@@ -1,0 +1,38 @@
+[
+  {
+    "type": "task",
+    "description": "Some Task"
+  },
+  {
+    "type": "group",
+    "description": "A Task Group",
+    "tasks": [
+      {
+        "type": "task",
+        "description": "A Sub Task"
+      },
+      {
+        "type": "task",
+        "description": "Another Sub Task"
+      },
+      {
+        "type": "group",
+        "description": "Another Sub Group of a Group",
+        "tasks": [
+          {
+            "type": "task",
+            "description": "A Sub Task of a Task Group"
+          },
+          {
+            "type": "task",
+            "description": "Another Sub Task of a Task Group"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "task",
+    "description": "Ä Task with some fançy charš!"
+  }
+]
