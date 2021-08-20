@@ -74,6 +74,7 @@ class Toggle extends HTMLButtonElement {
     button.active = activeLabel
     button.inactive = inactiveLabel
     button.innerText = activeLabel
+    button.setAttribute('is', 'garganttua-group-toggle')
     return button
   }
 }
@@ -82,6 +83,8 @@ class TaskGroup extends HTMLLIElement {
   connectedCallback () {
     this.groupGrid = this.querySelector(':scope > garganttua-gantt-grid')
     this.subList = this.querySelector(':scope > [is=garganttua-task-list]')
+    this.nestedTaskGroups = Array.from(this.querySelectorAll('[is=garganttua-task-group]'))
+
     if (this.subList) {
       this.attachToggles()
     }
@@ -90,12 +93,14 @@ class TaskGroup extends HTMLLIElement {
   attachToggles () {
     const groupGridDescription = this.groupGrid.querySelector('p')
     this.groupChildrenToggle = Toggle.build('show', 'hide')
-    console.log(this.groupChildrenToggle)
+
     this.groupChildrenToggle.addEventListener('click', e => {
       e.preventDefault()
       const currentVisibility = this.subList.style.getPropertyValue('visibility')
 
       if (currentVisibility === 'visible') {
+        this.nestedTaskGroups.forEach(group => group.resetCollapsedState())
+
         this.subList.style.setProperty('visibility', 'hidden')
         this.groupChildrenToggle.activate()
       } else {
@@ -105,6 +110,11 @@ class TaskGroup extends HTMLLIElement {
     })
 
     groupGridDescription.after(this.groupChildrenToggle)
+  }
+
+  resetCollapsedState () {
+    this.groupChildrenToggle.activate() // reset to active label
+    this.subList.style.removeProperty('visibility')
   }
 }
 
