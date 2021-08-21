@@ -1,4 +1,4 @@
-import { Toggle } from './toggle'
+import { Toggle } from './toggle.js'
 
 export class TaskGroup extends HTMLLIElement {
   groupGrid: HTMLElement | null | undefined
