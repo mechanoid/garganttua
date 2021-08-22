@@ -1,6 +1,6 @@
 /* global HTMLLIElement, HTMLButtonElement */
 
-export class Toggle extends HTMLButtonElement {
+export class ToggleElement extends HTMLButtonElement {
   activeLabel: string
   inactiveLabel: string
 
@@ -34,8 +34,8 @@ export class Toggle extends HTMLButtonElement {
     this.innerText = this.inactive
   }
 
-  static build (activeLabel: string, inactiveLabel: string): Toggle {
-    const button:Toggle = document.createElement('button', { is: 'garganttua-group-toggle' }) as Toggle
+  static build (activeLabel: string, inactiveLabel: string): ToggleElement {
+    const button:ToggleElement = document.createElement('button', { is: 'garganttua-group-toggle' }) as ToggleElement
     button.active = activeLabel
     button.inactive = inactiveLabel
     button.innerText = activeLabel

@@ -35,7 +35,7 @@ garganttua-gantt-grid {
   grid-template-columns: minmax(var(--task-description-min-width),1fr) repeat(var(--day-count), 3em);
 }
 
-garganttua-gantt-task-schedule {
+garganttua-task-schedule {
   background-color: var(--task-schedule-bg-col);
   border-radius: var(--task-schedule-border-radius);
 

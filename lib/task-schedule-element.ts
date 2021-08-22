@@ -1,4 +1,4 @@
-export class TaskSchedule extends HTMLElement {
+export class TaskScheduleElement extends HTMLElement {
   connectedCallback (): void {
     this.provideConfigAsCSSProps()
   }

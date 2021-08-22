@@ -1,10 +1,10 @@
-import { Toggle } from './toggle.js'
+import { ToggleElement } from './toggle-element.js'
 
-export class TaskGroup extends HTMLLIElement {
-  groupGrid: HTMLElement | null | undefined
-  subList: HTMLElement | null | undefined
-  nestedTaskGroups: HTMLElement[] | undefined
-  groupChildrenToggle: Toggle | undefined
+export class TaskGroupElement extends HTMLLIElement {
+  groupGrid?: HTMLElement
+  subList?: HTMLElement
+  nestedTaskGroups?: HTMLElement[]
+  groupChildrenToggle?: ToggleElement
 
   connectedCallback (): void {
     this.groupGrid = this.querySelector(':scope > garganttua-gantt-grid') as HTMLElement
@@ -18,14 +18,14 @@ export class TaskGroup extends HTMLLIElement {
 
   attachToggles (): void {
     const groupGridDescription = this.groupGrid?.querySelector('p')
-    this.groupChildrenToggle = Toggle.build('show', 'hide')
+    this.groupChildrenToggle = ToggleElement.build('show', 'hide')
 
     this.groupChildrenToggle.addEventListener('click', e => {
       e.preventDefault()
       const listVisibility = this.subList?.style.getPropertyValue('visibility')
 
       if (listVisibility === 'visible') {
-        this.nestedTaskGroups?.forEach((group) => { (group as TaskGroup).resetCollapsedState() })
+        this.nestedTaskGroups?.forEach((group) => { (group as TaskGroupElement).resetCollapsedState() })
 
         this.subList?.style.setProperty('visibility', 'hidden')
         this.groupChildrenToggle?.activate()
