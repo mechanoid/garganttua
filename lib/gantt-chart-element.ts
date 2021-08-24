@@ -5,16 +5,24 @@ import { TaskListElement } from './task-list-element.js'
 import { TimelineElement } from './timeline-element.js'
 // import { TaskGroup } from './task-group.js'
 
+const buildLoaderElement = () => {
+  const element = document.createElement('div')
+  element.classList.add('loader')
+  return element
+}
+
 export class GanttChartElement extends HTMLElement {
   tasks: TaskList
   taskList?: TaskListElement
   timeline?: TimelineElement
   private _start?: Date
   private _end?: Date
+  loader: HTMLDivElement
 
   constructor () {
     super()
     this.tasks = []
+    this.loader = buildLoaderElement()
   }
 
   async connectedCallback (): Promise<void> {
@@ -24,7 +32,9 @@ export class GanttChartElement extends HTMLElement {
     this.prepend(this.timeline)
 
     if (this.src) {
+      this.appendChild(this.loader)
       this.tasks = await load(this.src)
+      this.loader.remove()
 
       if (this.tasks.length > 0) {
         this.taskList = TaskListElement.build(this.tasks)
