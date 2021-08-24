@@ -31,6 +31,7 @@ export class GanttChartElement extends HTMLElement {
   provideConfigAsCSSProps (): void {
     this.style.setProperty('--grid-columns', this.columnCount.toString())
     this.style.setProperty('--group-children-visibility', this.collapsable ? 'hidden' : 'visible')
+    this.style.setProperty('--group-children-display', this.collapsable ? 'none' : 'block')
   }
 
   get start (): Date | null {

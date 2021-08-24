@@ -65,5 +65,6 @@ garganttua-task-schedule {
 }
 
 [is=garganttua-task-group] [is=garganttua-task-list] {
+  display: var(--group-children-display);
   visibility: var(--group-children-visibility);
 }

@@ -1,4 +1,4 @@
-import { parseISO, differenceInDays } from 'date-fns'
+import { parseISO, differenceInDays, formatISO } from 'date-fns'
 import { GanttChartElement } from './gantt-chart-element.js'
 import { Task } from './task-list.js'
 
@@ -33,7 +33,6 @@ export class TaskScheduleElement extends HTMLElement {
 
   connectedCallback (): void {
     this.ganttChart = this.closest('garganttua-gantt-chart') as GanttChartElement
-    console.log(this.task?.description, this.start, this.end)
 
     this.provideConfigAsCSSProps()
   }
@@ -79,6 +78,7 @@ export class TaskScheduleElement extends HTMLElement {
 
   set startDate (unparsed: string | Date) {
     this._startDate = (unparsed instanceof Date) ? unparsed : parseISO(unparsed)
+    this.setAttribute('start', formatISO(this._startDate, { representation: 'date' }))
   }
 
   get endDate (): string | Date {
@@ -91,6 +91,7 @@ export class TaskScheduleElement extends HTMLElement {
 
   set endDate (unparsed: string | Date) {
     this._endDate = (unparsed instanceof Date) ? unparsed : parseISO(unparsed)
+    this.setAttribute('end', formatISO(this._endDate, { representation: 'date' }))
   }
 
   static build (task: Task): TaskScheduleElement {
@@ -103,6 +104,7 @@ export class TaskScheduleElement extends HTMLElement {
     if (task.end) {
       element.endDate = task.end
     }
+
     return element
   }
 }

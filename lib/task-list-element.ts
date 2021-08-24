@@ -40,14 +40,17 @@ export class TaskListElement extends HTMLUListElement {
   }
 
   hide ():void {
+    this.style.setProperty('display', 'none')
     this.style.setProperty('visibility', 'hidden')
   }
 
   show ():void {
+    this.style.setProperty('display', 'block')
     this.style.setProperty('visibility', 'visible')
   }
 
   resetVisibility ():void {
+    this.style.removeProperty('display')
     this.style.removeProperty('visibility')
   }
 
