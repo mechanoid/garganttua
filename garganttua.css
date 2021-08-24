@@ -1,7 +1,7 @@
 /* base setup and resetting */
 :root {
   /* task description */
-  --task-description-min-width: 10em;
+  --task-description-min-width: 15em;
 
   /* task schedule */
   --task-schedule-bg-col: rgb(102, 125, 140);
@@ -25,14 +25,14 @@ garganttua-gantt-chart ul, garganttua-gantt-chart li {
   grid setup for tasks and schedules
 
   Required Properties:
-    --day-count: defines the available grid columns a task can be assigned to
+    --grid-columns: defines the available grid columns a task can be assigned to
     --schedule-start: defines the column for the schedule to start
     --schedule-end: defines the column for the schedule to end
 */
 garganttua-task {
   display: grid;
   justify-items: stretch;
-  grid-template-columns: minmax(var(--task-description-min-width),1fr) repeat(var(--day-count), 3em);
+  grid-template-columns: minmax(var(--task-description-min-width),30rem) repeat(var(--grid-columns), 3em);
 }
 
 garganttua-task-schedule {
@@ -41,6 +41,9 @@ garganttua-task-schedule {
 
   grid-column-start: var(--schedule-start);
   grid-column-end: var(--schedule-end);
+
+  height: 2rem;
+  align-self: center;
 }
 
 [is=garganttua-task-list-item] {
