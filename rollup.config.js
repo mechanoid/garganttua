@@ -7,7 +7,8 @@ export default {
     dir: 'dist/',
     format: 'es',
     paths: {
-      zod: 'node_modules/zod/lib/'
+      zod: 'node_modules/zod',
+      "date-fns": 'node_modules/date-fns'
     }
   },
   plugins: [typescript({ tsconfig: 'tsconfig.json' }), nodeResolve()]

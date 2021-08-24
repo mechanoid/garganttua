@@ -1,3 +1,4 @@
+import { parseISO, differenceInDays, startOfMonth, endOfMonth } from 'date-fns'
 import { load, TaskList } from './task-list.js'
 // import { TaskGroupElement } from './task-group-element.js'
 import { TaskListElement } from './task-list-element.js'
@@ -6,6 +7,8 @@ import { TaskListElement } from './task-list-element.js'
 export class GanttChartElement extends HTMLElement {
   tasks: TaskList
   taskList?: TaskListElement
+  private _start?: Date
+  private _end?: Date
 
   constructor () {
     super()
@@ -13,6 +16,8 @@ export class GanttChartElement extends HTMLElement {
   }
 
   async connectedCallback (): Promise<void> {
+    console.log(this.daysFromDates)
+
     this.provideConfigAsCSSProps()
 
     if (this.src) {
@@ -26,16 +31,36 @@ export class GanttChartElement extends HTMLElement {
   }
 
   provideConfigAsCSSProps (): void {
-    this.style.setProperty('--day-count', this.days)
+    this.style.setProperty('--day-count', (this.days ? this.days : this.daysFromDates).toString())
     this.style.setProperty('--group-children-visibility', this.collapsable ? 'hidden' : 'visible')
   }
 
-  get days (): string {
-    const days = this.getAttribute('days')
-    if (!days) {
-      throw new Error('you did not specify any "days". We do not now how long the desired schedule should be')
+  get start (): Date | null {
+    const start = this.dateFromAttribute('start')
+    return start ? startOfMonth(start) : null // let's use full month for the general chart view (maybe worth a config param)
+  }
+
+  get end (): Date | null {
+    const end = this.dateFromAttribute('end')
+    return end ? endOfMonth(end) : null // let's use full month for the general chart view (maybe worth a config param)
+  }
+
+  get daysFromDates (): number {
+    if (!!this.start && !!this.end) {
+      return differenceInDays(this.end, this.start)
     }
-    return days
+
+    throw new Error('no start/end date provided. Cannot accumulate days from dates.')
+  }
+
+  get days (): number | null {
+    const days = this.getAttribute('days')
+
+    if (days) {
+      return parseInt(days)
+    }
+
+    return null
   }
 
   get groups (): string {
@@ -53,5 +78,15 @@ export class GanttChartElement extends HTMLElement {
 
   get src (): string | null {
     return this.getAttribute('src')
+  }
+
+  dateFromAttribute (attr: string): Date | null {
+    const unparsed = this.getAttribute(attr)
+
+    if (unparsed) {
+      return parseISO(unparsed)
+    }
+
+    return null
   }
 }
