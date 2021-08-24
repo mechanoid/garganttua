@@ -16,8 +16,6 @@ export class GanttChartElement extends HTMLElement {
   }
 
   async connectedCallback (): Promise<void> {
-    console.log(this.daysFromDates)
-
     this.provideConfigAsCSSProps()
 
     if (this.src) {
@@ -31,7 +29,7 @@ export class GanttChartElement extends HTMLElement {
   }
 
   provideConfigAsCSSProps (): void {
-    this.style.setProperty('--day-count', (this.days ? this.days : this.daysFromDates).toString())
+    this.style.setProperty('--grid-columns', this.columnCount.toString())
     this.style.setProperty('--group-children-visibility', this.collapsable ? 'hidden' : 'visible')
   }
 
@@ -45,22 +43,16 @@ export class GanttChartElement extends HTMLElement {
     return end ? endOfMonth(end) : null // let's use full month for the general chart view (maybe worth a config param)
   }
 
+  get columnCount () : number { // alias for daysFromDates related to grid columns
+    return this.daysFromDates + 2
+  }
+
   get daysFromDates (): number {
     if (!!this.start && !!this.end) {
       return differenceInDays(this.end, this.start)
     }
 
     throw new Error('no start/end date provided. Cannot accumulate days from dates.')
-  }
-
-  get days (): number | null {
-    const days = this.getAttribute('days')
-
-    if (days) {
-      return parseInt(days)
-    }
-
-    return null
   }
 
   get groups (): string {

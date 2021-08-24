@@ -3,8 +3,8 @@ import { z } from 'zod'
 export interface Task {
   type: string
   description: string
-  start?: Date
-  end?: Date
+  start?: string
+  end?: string
 }
 
 export interface TaskGroup {
@@ -15,11 +15,14 @@ export interface TaskGroup {
 
 export type TaskList = Array<Task|TaskGroup>
 
+const dateFormat = /^\d\d\d\d-\d\d-\d\d$/
+const dateFormatErrorMessage = 'the task date format needs to be YYYY-mm-dd'
+
 const Task: z.ZodSchema<Task> = z.object({
   type: z.literal('task'),
   description: z.string(),
-  start: z.date().optional(),
-  end: z.date().optional()
+  start: z.string().regex(dateFormat, dateFormatErrorMessage).optional(),
+  end: z.string().regex(dateFormat, dateFormatErrorMessage).optional()
 })
 
 const TaskGroup: z.ZodSchema<TaskGroup> = z.lazy(() =>
@@ -32,7 +35,7 @@ const TaskGroup: z.ZodSchema<TaskGroup> = z.lazy(() =>
 
 const TaskList: z.ZodSchema<TaskList> = z.array(Task.or(TaskGroup))
 
-const parse = (input: Record<string, unknown>): TaskList => TaskList.parse(input)
+const parse = async (input: Record<string, unknown>): Promise<TaskList> => TaskList.parseAsync(input)
 
 export const load = async (src: string): Promise<TaskList> => {
   if (!src) {

@@ -1,4 +1,5 @@
 import { Task } from './task-list.js'
+import { TaskScheduleElement } from './task-schedule-element.js'
 
 const buildTaskDescription = (text: string): HTMLParagraphElement => {
   const is = 'garganttua-task-description'
@@ -10,12 +11,15 @@ const buildTaskDescription = (text: string): HTMLParagraphElement => {
 
 export class TaskElement extends HTMLElement {
   static build (task: Task): TaskElement {
-    const element:TaskElement = document.createElement('garganttua-task') as TaskElement
+    const element = document.createElement('garganttua-task') as TaskElement
     const description = buildTaskDescription(task.description)
     element.appendChild(description)
+
     if (task.start && task.end) {
-      // TODO: provide schedule, based on start/end dates converted to grid-cols
+      const schedule = TaskScheduleElement.build(task)
+      element.appendChild(schedule)
     }
+
     return element
   }
 }

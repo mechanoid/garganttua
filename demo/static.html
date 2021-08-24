@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Garganttua Chart Demo - Static Rendered Component</title>
+    <title>Garganttua Chart Demo - Static Rend-colered Component</title>
     <link rel="stylesheet" href="../garganttua.css" />
 
     <script src="//unpkg.com/@ungap/custom-elements/es.js" defer></script>
@@ -18,49 +18,49 @@
         <li is="garganttua-task-list-item">
           <garganttua-task>
             <p is="garganttua-task-description">Some Task</p>
-            <garganttua-task-schedule start="5" end="15"></garganttua-task-schedule>
+            <garganttua-task-schedule start-col="5" end-col="15"></garganttua-task-schedule>
           </garganttua-task>
         </li>
         <li is="garganttua-task-list-item">
           <garganttua-task>
             <p is="garganttua-task-description">Some Other Task</p>
-            <garganttua-task-schedule start="25" end="150"></garganttua-task-schedule>
+            <garganttua-task-schedule start-col="25" end-col="150"></garganttua-task-schedule>
           </garganttua-task>
         </li>
         <li is="garganttua-task-group">
           <garganttua-task>
             <p is="garganttua-task-description">Some Task Group</p>
             <!-- TODO: the task-schedules of the group should be derived from the children -->
-            <garganttua-task-schedule start="5" end="10"></garganttua-task-schedule>
-            <garganttua-task-schedule start="15" end="50"></garganttua-task-schedule>
+            <garganttua-task-schedule start-col="5" end-col="10"></garganttua-task-schedule>
+            <garganttua-task-schedule start-col="15" end-col="50"></garganttua-task-schedule>
           </garganttua-task>
 
           <ul is="garganttua-task-list">
             <li is="garganttua-task-list-item">
               <garganttua-task>
                 <p is="garganttua-task-description">Some Sub Task</p>
-                <garganttua-task-schedule start="5" end="10"></garganttua-task-schedule>
+                <garganttua-task-schedule start-col="5" end-col="10"></garganttua-task-schedule>
               </garganttua-task>
             </li>
             <li is="garganttua-task-group">
               <garganttua-task>
                 <p is="garganttua-group-description">Some Task Group</p>
                 <!-- TODO: the task-schedules of the group should be derived from the children -->
-                <garganttua-task-schedule start="5" end="10"></garganttua-task-schedule>
-                <garganttua-task-schedule start="15" end="50"></garganttua-task-schedule>
+                <garganttua-task-schedule start-col="5" end-col="10"></garganttua-task-schedule>
+                <garganttua-task-schedule start-col="15" end-col="50"></garganttua-task-schedule>
               </garganttua-task>
 
               <ul is="garganttua-task-list">
                 <li is="garganttua-task-list-item">
                   <garganttua-task>
                     <p is="garganttua-group-description">Some Sub Task</p>
-                    <garganttua-task-schedule start="5" end="10"></garganttua-task-schedule>
+                    <garganttua-task-schedule start-col="5" end-col="10"></garganttua-task-schedule>
                   </garganttua-task>
                 </li>
                 <li is="garganttua-task-list-item">
                   <garganttua-task>
                     <p is="garganttua-task-description">Another Sub Task</p>
-                    <garganttua-task-schedule start="7" end="50"></garganttua-task-schedule>
+                    <garganttua-task-schedule start-col="7" end-col="50"></garganttua-task-schedule>
                   </garganttua-task>
                 </li>
               </ul>

@@ -1,7 +1,9 @@
 [
   {
     "type": "task",
-    "description": "Some Task"
+    "description": "Some Task",
+    "start": "2020-12-05",
+    "end": "2021-02-20"
   },
   {
     "type": "group",
@@ -9,11 +11,15 @@
     "tasks": [
       {
         "type": "task",
-        "description": "A Sub Task"
+        "description": "A Sub Task",
+        "start": "2021-01-15",
+        "end": "2021-04-30"
       },
       {
         "type": "task",
-        "description": "Another Sub Task"
+        "description": "Another Sub Task",
+        "start": "2021-01-05",
+        "end": "2021-01-20"
       },
       {
         "type": "group",
@@ -21,11 +27,15 @@
         "tasks": [
           {
             "type": "task",
-            "description": "A Sub Task of a Task Group"
+            "description": "A Sub Task of a Task Group",
+            "start": "2020-12-01",
+            "end": "2020-12-05"
           },
           {
             "type": "task",
-            "description": "Another Sub Task of a Task Group"
+            "description": "Another Sub Task of a Task Group",
+            "start": "2020-12-10",
+            "end": "2020-12-12"
           }
         ]
       }
@@ -33,6 +43,8 @@
   },
   {
     "type": "task",
-    "description": "Ä Task with some fançy charš!"
+    "description": "Ä Task with some fançy charš!",
+    "start": "2020-08-12",
+    "end": "2021-01-15"
   }
 ]
