@@ -16,13 +16,15 @@
     <garganttua-gantt-chart start="2020-12-01" end="2021-03-15" groups="collapsable">
       <ul is="garganttua-task-list">
         <li is="garganttua-task-list-item">
-          <garganttua-task
-            ><p is="garganttua-task-description">Some Task</p>
+          <garganttua-task>
+            <p is="garganttua-task-description">Some Task</p>
             <garganttua-task-schedule start="2020-12-05" end="2021-02-20"></garganttua-task-schedule>
           </garganttua-task>
         </li>
         <li is="garganttua-task-group">
-          <garganttua-task> <p is="garganttua-task-description">A Task Group</p></garganttua-task>
+          <garganttua-task>
+            <p is="garganttua-task-description">A Task Group</p>
+          </garganttua-task>
           <ul is="garganttua-task-list">
             <li is="garganttua-task-list-item">
               <garganttua-task>
@@ -67,8 +69,6 @@
 </html>
 
 <!-- Open ToDos: -->
-<!-- TODO: generate day description on top of the list -->
-<!-- TODO: generate month description on top of the list -->
 <!-- TODO: allow different task states
       Resulting in:
         * different colors for the schedules -->

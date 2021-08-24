@@ -2,11 +2,13 @@ import { parseISO, differenceInDays, startOfMonth, endOfMonth } from 'date-fns'
 import { load, TaskList } from './task-list.js'
 // import { TaskGroupElement } from './task-group-element.js'
 import { TaskListElement } from './task-list-element.js'
+import { TimelineElement } from './timeline-element.js'
 // import { TaskGroup } from './task-group.js'
 
 export class GanttChartElement extends HTMLElement {
   tasks: TaskList
   taskList?: TaskListElement
+  timeline?: TimelineElement
   private _start?: Date
   private _end?: Date
 
@@ -17,6 +19,9 @@ export class GanttChartElement extends HTMLElement {
 
   async connectedCallback (): Promise<void> {
     this.provideConfigAsCSSProps()
+
+    this.timeline = TimelineElement.build(this)
+    this.prepend(this.timeline)
 
     if (this.src) {
       this.tasks = await load(this.src)

@@ -21,6 +21,7 @@ export class TaskGroupElement extends HTMLLIElement {
     this.ganttChart = this.closest('garganttua-gantt-chart') as GanttChartElement
 
     this.task = this.querySelector(':scope > garganttua-task') as HTMLElement
+    this.task.classList.add('is-group-task')
 
     this.nestedTaskGroups = Array.from(this.querySelectorAll('[is=garganttua-task-group]'))
     this.subList = this.querySelector(':scope > [is=garganttua-task-list]')
@@ -51,11 +52,7 @@ export class TaskGroupElement extends HTMLLIElement {
       }
     })
 
-    if (taskDescription) {
-      taskDescription.after(this.groupChildrenToggle)
-    } else {
-      this.task?.appendChild(this.groupChildrenToggle)
-    }
+    taskDescription?.appendChild(this.groupChildrenToggle)
   }
 
   resetcollapsableState (): void {

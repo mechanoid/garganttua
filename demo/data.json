@@ -2,7 +2,7 @@
   {
     "type": "task",
     "description": "Some Task",
-    "start": "2020-12-05",
+    "start": "2020-12-02",
     "end": "2021-02-20"
   },
   {
@@ -12,7 +12,7 @@
       {
         "type": "task",
         "description": "A Sub Task",
-        "start": "2021-01-15",
+        "start": "2020-02-12",
         "end": "2021-04-30"
       },
       {
