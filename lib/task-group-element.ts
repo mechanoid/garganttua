@@ -2,8 +2,10 @@ import { ToggleElement } from './toggle-element.js'
 import { Task, TaskGroup } from './task-list.js'
 import { TaskListElement } from './task-list-element.js'
 import { TaskElement } from './task-element.js'
+import { GanttChartElement } from './gantt-chart-element.js'
 
 export class TaskGroupElement extends HTMLLIElement {
+  ganttChart?: GanttChartElement
   task?: HTMLElement
   subList: TaskListElement | null
   nestedTaskGroups?: HTMLElement[]
@@ -15,11 +17,12 @@ export class TaskGroupElement extends HTMLLIElement {
   }
 
   connectedCallback (): void {
+    this.ganttChart = this.closest('garganttua-gantt-chart') as GanttChartElement
     this.task = this.querySelector(':scope > garganttua-task') as HTMLElement
     this.subList = this.querySelector(':scope > [is=garganttua-task-list]')
     this.nestedTaskGroups = Array.from(this.querySelectorAll('[is=garganttua-task-group]'))
 
-    if (!!this.task && !!this.subList) {
+    if (this.ganttChart.collapsable && !!this.task && !!this.subList) {
       this.attachToggles()
     }
   }
