@@ -1,58 +1,33 @@
+import { load, TaskList } from './task-list.js'
+// import { TaskGroupElement } from './task-group-element.js'
+import { TaskListElement } from './task-list-element.js'
 // import { TaskGroup } from './task-group.js'
-interface Task {
-  description: string
-}
-
-interface TaskGroup {
-  description: string
-  tasks: Array<Task|TaskGroup>
-}
-
-export type TaskList = Array<Task|TaskGroup>
 
 export class GanttChartElement extends HTMLElement {
-  private _tasks: TaskList
+  tasks: TaskList
+  taskList?: TaskListElement
 
   constructor () {
     super()
-    this._tasks = []
+    this.tasks = []
   }
 
   async connectedCallback (): Promise<void> {
     this.provideConfigAsCSSProps()
 
-    this.tasks = await this.loadTasks()
+    if (this.src) {
+      this.tasks = await load(this.src)
 
-    console.log(this.tasks)
+      if (this.tasks.length > 0) {
+        this.taskList = TaskListElement.build(this.tasks)
+        this.appendChild(this.taskList)
+      }
+    }
   }
 
   provideConfigAsCSSProps (): void {
     this.style.setProperty('--day-count', this.days)
     this.style.setProperty('--group-children-visibility', this.groups === 'collapsed' ? 'hidden' : 'visible')
-  }
-
-  async loadTasks (): Promise<TaskList> {
-    if (this.hasSrc()) {
-      const result = await fetch(this.src as string)
-
-      if (!result.ok) {
-        throw new Error(`GarganttuaCantLoadTasks: (${result.status}) ${result.statusText}`)
-      }
-
-      const tasks = result.json()
-
-      return tasks as Promise<TaskList>
-    } else {
-      return []
-    }
-  }
-
-  get tasks (): TaskList {
-    return this._tasks
-  }
-
-  set tasks (tasks: TaskList) {
-    this._tasks = tasks
   }
 
   get days (): string {

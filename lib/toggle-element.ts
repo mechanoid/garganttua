@@ -35,12 +35,13 @@ export class ToggleElement extends HTMLButtonElement {
   }
 
   static build (activeLabel: string, inactiveLabel: string): ToggleElement {
-    const button:ToggleElement = document.createElement('button', { is: 'garganttua-group-toggle' }) as ToggleElement
+    const is = 'garganttua-group-toggle'
+    const button:ToggleElement = document.createElement('button', { is }) as ToggleElement
     button.active = activeLabel
     button.inactive = inactiveLabel
     button.innerText = activeLabel
     // the button is properly created, but we let's add the `is` attribute, so that we can find the button in the dom.
-    button.setAttribute('is', 'garganttua-group-toggle')
+    button.setAttribute('is', is)
     return button
   }
 }

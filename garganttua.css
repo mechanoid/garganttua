@@ -29,7 +29,7 @@ garganttua-gantt-chart ul, garganttua-gantt-chart li {
     --schedule-start: defines the column for the schedule to start
     --schedule-end: defines the column for the schedule to end
 */
-garganttua-gantt-grid {
+garganttua-task {
   display: grid;
   justify-items: stretch;
   grid-template-columns: minmax(var(--task-description-min-width),1fr) repeat(var(--day-count), 3em);
@@ -43,11 +43,11 @@ garganttua-task-schedule {
   grid-column-end: var(--schedule-end);
 }
 
-[is=garganttua-task] {
+[is=garganttua-task-list-item] {
   margin-bottom: var(--task-gap);
 }
 
-[is=garganttua-task]:last-of-type {
+[is=garganttua-task-list-item]:last-of-type {
   margin-bottom: 0;
 }
 
@@ -57,7 +57,7 @@ garganttua-task-schedule {
   Required Properties:
     --group-children-visibility: initial visibility of sub tasks (all visible or all hidden)
 */
-[is=garganttua-task-group] > garganttua-gantt-grid + [is=garganttua-task-list] {
+[is=garganttua-task-group] > garganttua-task + [is=garganttua-task-list] {
   margin-top: var(--task-gap);
 }
 
