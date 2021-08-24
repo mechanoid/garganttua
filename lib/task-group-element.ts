@@ -33,7 +33,7 @@ export class TaskGroupElement extends HTMLLIElement {
 
       if (this.subList) {
         if (this.subList.isVisibile()) {
-          this.nestedTaskGroups?.forEach((group) => { (group as TaskGroupElement).resetCollapsedState() })
+          this.nestedTaskGroups?.forEach((group) => { (group as TaskGroupElement).resetcollapsableState() })
 
           this.subList.hide()
           this.groupChildrenToggle?.activate()
@@ -51,7 +51,7 @@ export class TaskGroupElement extends HTMLLIElement {
     }
   }
 
-  resetCollapsedState (): void {
+  resetcollapsableState (): void {
     this.groupChildrenToggle?.activate() // reset to active label
     this.subList?.style.removeProperty('visibility')
   }

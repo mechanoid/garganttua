@@ -27,7 +27,7 @@ export class GanttChartElement extends HTMLElement {
 
   provideConfigAsCSSProps (): void {
     this.style.setProperty('--day-count', this.days)
-    this.style.setProperty('--group-children-visibility', this.groups === 'collapsed' ? 'hidden' : 'visible')
+    this.style.setProperty('--group-children-visibility', this.collapsable ? 'hidden' : 'visible')
   }
 
   get days (): string {
@@ -40,7 +40,11 @@ export class GanttChartElement extends HTMLElement {
 
   get groups (): string {
     const groups = this.getAttribute('groups') || ''
-    return ['collapsed', 'expanded'].includes(groups) ? groups : 'expanded'
+    return ['collapsable', 'expanded'].includes(groups) ? groups : 'expanded'
+  }
+
+  get collapsable (): boolean {
+    return this.groups === 'collapsable'
   }
 
   hasSrc (): boolean {
