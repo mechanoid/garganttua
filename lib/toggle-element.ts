@@ -5,7 +5,6 @@ export class ToggleElement extends HTMLButtonElement {
   inactiveText?: string
 
   connectedCallback (): void {
-    console.log('connected', this.activeText)
     this.innerText = this.activeText || ''
   }
 

@@ -13,12 +13,19 @@
   <body>
     <h1>Garganttua Chart Demo</h1>
 
-    <garganttua-gantt-chart start="2020-12-01" end="2021-03-15" groups="collapsable">
+    <garganttua-gantt-chart start="2020-12-01" end="2021-03-15">
       <ul is="garganttua-task-list">
         <li is="garganttua-task-list-item">
           <garganttua-task>
             <p is="garganttua-task-description">Some Task</p>
-            <garganttua-task-schedule start="2020-12-05" end="2021-02-20"></garganttua-task-schedule>
+            <garganttua-task-schedule class="has-content" start="2020-12-05" end="2020-12-10">
+              <garganttua-task-schedule-content>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. <a href="#">Assumenda vitae</a> dignissimos
+                  ex rerum. Optio earum modi perferendis.
+                </p>
+              </garganttua-task-schedule-content>
+            </garganttua-task-schedule>
           </garganttua-task>
         </li>
         <li is="garganttua-task-group">
@@ -44,13 +51,27 @@
                 <li is="garganttua-task-list-item">
                   <garganttua-task>
                     <p is="garganttua-task-description">A Sub Task of a Task Group</p>
-                    <garganttua-task-schedule start="2020-12-01" end="2020-12-05"></garganttua-task-schedule>
+                    <garganttua-task-schedule class="has-content" start="2020-12-01" end="2021-02-10">
+                      <garganttua-task-schedule-content>
+                        <p>
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                          <a href="#">Assumenda vitae</a> dignissimos ex rerum. Optio earum modi perferendis.
+                        </p>
+                      </garganttua-task-schedule-content>
+                    </garganttua-task-schedule>
                   </garganttua-task>
                 </li>
                 <li is="garganttua-task-list-item">
                   <garganttua-task>
                     <p is="garganttua-task-description">Another Sub Task of a Task Group</p>
-                    <garganttua-task-schedule start="2020-12-10" end="2020-12-12"></garganttua-task-schedule>
+                    <garganttua-task-schedule class="has-content" start="2020-12-10" end="2020-12-12">
+                      <garganttua-task-schedule-content>
+                        <p>
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                          <a href="#">Assumenda vitae</a> dignissimos ex rerum. Optio earum modi perferendis.
+                        </p>
+                      </garganttua-task-schedule-content>
+                    </garganttua-task-schedule>
                   </garganttua-task>
                 </li>
               </ul>
@@ -72,9 +93,3 @@
 <!-- TODO: allow different task states
       Resulting in:
         * different colors for the schedules -->
-<!-- TODO: generate task numbers, including group numbering and group prefixes for tasks
-      Exmpl:
-        1. Task Group
-        1.1 Task 1
-        1.2 Task 2
-        2. Task 3 -->

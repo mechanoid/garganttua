@@ -7,20 +7,27 @@
   --task-schedule-bg-col: rgb(102, 125, 140);
   --task-schedule-border-radius: 3px;
   --task-schedule-col-width: 1rem;
-  --task-schedule-height: 50%;
+  --task-schedule-height: 2rem;
+
+  /* task schedule content */
+  --task-schedule-content-min-width: 30rem;
 
   /* task list */
-  --task-gap: .5em; /* defines the vertical gap between two tasks */
-
-  --timeline-row-gap: .5em;
-  --timeline-font-size: .75em;
+  --task-gap: 0.5em; /* defines the vertical gap between two tasks */
+  --timeline-row-gap: 0.5em;
+  --timeline-font-size: 0.75em;
 }
 
 garganttua-gantt-chart {
   box-sizing: border-box;
 }
 
-garganttua-gantt-chart ul, garganttua-gantt-chart li {
+garganttua-gantt-chart * {
+  box-sizing: border-box;
+}
+
+garganttua-gantt-chart ul,
+garganttua-gantt-chart li {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -34,16 +41,21 @@ garganttua-gantt-chart ul, garganttua-gantt-chart li {
     --schedule-start: defines the column for the schedule to start
     --schedule-end: defines the column for the schedule to end
 */
-garganttua-task, [is=garganttua-timeline] {
+garganttua-task,
+[is=garganttua-timeline] {
   display: grid;
   justify-items: stretch;
-  grid-template-columns: minmax(var(--task-description-min-width),30rem) repeat(var(--grid-columns), var(--task-schedule-col-width));
-  row-gap: var(--timeline-row-gap)
+  grid-template-columns: minmax(var(--task-description-min-width), 30rem) repeat(var(--grid-columns), var(--task-schedule-col-width));
+  row-gap: var(--timeline-row-gap);
+  align-items: stretch;
 }
 
 [is=garganttua-task-description] {
-  text-align: right;
+  margin: 0;
+  padding-top: 0.5em;
   padding-right: 1em;
+  justify-self: right;
+  align-self: start;
 }
 
 .is-group-task [is=garganttua-task-description] {
@@ -53,12 +65,32 @@ garganttua-task, [is=garganttua-timeline] {
 garganttua-task-schedule {
   background-color: var(--task-schedule-bg-col);
   border-radius: var(--task-schedule-border-radius);
-
   grid-column-start: var(--schedule-start);
   grid-column-end: var(--schedule-end);
-
   height: var(--task-schedule-height);
-  align-self: center;
+  align-self: start;
+  overflow: hidden;
+  transition: all 0.3s ease-in;
+  min-width: 0;
+}
+
+garganttua-task-schedule-content {
+  display: block;
+  padding: 0.5em;
+  visibility: hidden;
+  opacity: 0;
+  min-width: var(--task-schedule-content-min-width);
+  transition: all 0.5s;
+}
+
+garganttua-task-schedule.has-content:hover {
+  height: 100%;
+  min-width: var(--task-schedule-content-min-width);
+}
+
+garganttua-task-schedule.has-content:hover garganttua-task-schedule-content {
+  visibility: visible;
+  opacity: 1;
 }
 
 [is=garganttua-task-list-item] {
@@ -71,13 +103,13 @@ garganttua-task-schedule {
   Required Properties:
     --group-children-visibility: initial visibility of sub tasks (all visible or all hidden)
 */
-[is=garganttua-task-group] > garganttua-task + [is=garganttua-task-list] {
-  margin-top: var(--task-gap);
-}
-
 [is=garganttua-task-group] [is=garganttua-task-list] {
   display: var(--group-children-display);
   visibility: var(--group-children-visibility);
+}
+
+[is=garganttua-task-group] > garganttua-task + [is=garganttua-task-list] {
+  margin-top: var(--task-gap);
 }
 
 [is=garganttua-group-toggle] {
@@ -97,7 +129,10 @@ garganttua-task-schedule {
 */
 
 [is=garganttua-timeline] {
+  border-bottom: 1px solid #cacaca;
   font-size: var(--timeline-font-size);
+  padding-bottom: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 [is=garganttua-timeline] li {
@@ -106,17 +141,18 @@ garganttua-task-schedule {
   grid-row: var(--label-row, 1);
 }
 
-
 /* CSS Spinner
   src: https://projects.lukehaas.me/css-loaders/
+  License: MIT - https://github.com/lukehaas/css-loaders/blob/1.0.0/LICENSE
 */
 
 .loader,
-.loader:after {
+.loader::after {
   border-radius: 50%;
   width: 10em;
   height: 10em;
 }
+
 .loader {
   margin: 60px auto;
   font-size: 10px;
@@ -138,16 +174,19 @@ garganttua-task-schedule {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
+
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
+
 @keyframes load8 {
   0% {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
+
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);

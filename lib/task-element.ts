@@ -10,10 +10,13 @@ const buildTaskDescription = (text: string): HTMLParagraphElement => {
 }
 
 export class TaskElement extends HTMLElement {
+  task?: Task
+
   static build (task: Task): TaskElement {
     const element = document.createElement('garganttua-task') as TaskElement
     const description = buildTaskDescription(task.description)
     element.appendChild(description)
+    element.task = task
 
     if (task.start && task.end) {
       const schedule = TaskScheduleElement.build(task)

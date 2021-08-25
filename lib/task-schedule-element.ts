@@ -15,7 +15,6 @@ const dateToGridStartCol = (date: Date, startDate: Date, rangeLength: number):nu
 
 const dateToGridEndCol = (date: Date, endDate: Date, rangeLength: number):number => {
   const dateDifference = differenceInDays(endDate, date)
-  console.log(dateDifference)
 
   if (dateDifference <= 0) { // date is later then largest date in grid, so we show it until the end
     return rangeLength
@@ -39,7 +38,6 @@ export class TaskScheduleElement extends HTMLElement {
     this.ganttChart = this.closest('garganttua-gantt-chart') as GanttChartElement
 
     this.provideConfigAsCSSProps()
-    console.log(this.task?.description, this.endDate, this.end)
   }
 
   provideConfigAsCSSProps (): void {
