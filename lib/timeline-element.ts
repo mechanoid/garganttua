@@ -4,6 +4,12 @@ import { TimelineItemElement } from './timeline-item-element.js'
 export class TimelineElement extends HTMLUListElement {
   ganttChart?: GanttChartElement
 
+  constructor () {
+    super()
+    const is = 'garganttua-timeline'
+    this.setAttribute('is', is)
+  }
+
   connectedCallback (): void {
     if (!this.ganttChart) {
       throw new Error('no gantt chart root element found. Element is not thought to be added manually.')

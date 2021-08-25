@@ -1,4 +1,8 @@
-import { parseISO, differenceInDays, startOfMonth, endOfMonth } from 'date-fns'
+import parseISO from 'date-fns/parseISO'
+import differenceInDays from 'date-fns/differenceInDays'
+import startOfMonth from 'date-fns/startOfMonth'
+import endOfMonth from 'date-fns/endOfMonth'
+
 import { load, TaskList } from './task-list.js'
 // import { TaskGroupElement } from './task-group-element.js'
 import { TaskListElement } from './task-list-element.js'

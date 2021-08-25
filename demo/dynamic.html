@@ -13,7 +13,14 @@
     </style>
 
     <script src="//unpkg.com/@ungap/custom-elements/es.js" defer></script>
-    <script src="../dist/garganttua.js" type="module"></script>
+    <!-- <script src="../dist/es/garganttua.js" type="module"></script> -->
+    <script>
+      import("../dist/es/garganttua.js").then(({ TimelineElement }) => {
+        const el = new TimelineElement();
+        console.log(el);
+        document.querySelector("body").prepend(el);
+      });
+    </script>
   </head>
   <body>
     <h1>Garganttua Chart Demo</h1>

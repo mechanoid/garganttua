@@ -1,4 +1,7 @@
-import { parseISO, differenceInDays, formatISO } from 'date-fns'
+import parseISO from 'date-fns/parseISO'
+import differenceInDays from 'date-fns/differenceInDays'
+import formatISO from 'date-fns/formatISO'
+
 import { GanttChartElement } from './gantt-chart-element.js'
 import { Task } from './task-list.js'
 import { TaskScheduleContentElement } from './task-schedule-content-element.js'

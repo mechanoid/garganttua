@@ -1,4 +1,7 @@
-import { add, format, isFirstDayOfMonth, getDate } from 'date-fns'
+import add from 'date-fns/add'
+import format from 'date-fns/format'
+import isFirstDayOfMonth from 'date-fns/isFirstDayOfMonth'
+import getDate from 'date-fns/getDate'
 
 export class TimelineItemElement extends HTMLLIElement {
   isWeekLabel: boolean
