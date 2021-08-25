@@ -129,10 +129,9 @@ garganttua-task-schedule.has-content:hover garganttua-task-schedule-content {
 */
 
 [is=garganttua-timeline] {
-  border-bottom: 1px solid #cacaca;
   font-size: var(--timeline-font-size);
-  padding-bottom: 0.5em;
-  margin-bottom: 0.5em;
+  padding-bottom: var(--timeline-row-gap);
+  margin-bottom: var(--timeline-row-gap);
 }
 
 [is=garganttua-timeline] li {

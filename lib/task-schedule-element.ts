@@ -1,6 +1,7 @@
 import { parseISO, differenceInDays, formatISO } from 'date-fns'
 import { GanttChartElement } from './gantt-chart-element.js'
 import { Task } from './task-list.js'
+import { TaskScheduleContentElement } from './task-schedule-content-element.js'
 
 const dateToGridStartCol = (date: Date, startDate: Date, rangeLength: number):number => {
   const dateDifference = differenceInDays(date, startDate)
@@ -33,9 +34,16 @@ export class TaskScheduleElement extends HTMLElement {
   private _endDate?: string | Date
   private _start?: number
   private _end?: number
+  content?: TaskScheduleContentElement
 
   connectedCallback (): void {
     this.ganttChart = this.closest('garganttua-gantt-chart') as GanttChartElement
+
+    if (this.task?.content) {
+      this.content = TaskScheduleContentElement.build(this.task)
+      this.classList.add('has-content')
+      this.appendChild(this.content)
+    }
 
     this.provideConfigAsCSSProps()
   }
