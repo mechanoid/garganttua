@@ -29,7 +29,7 @@
     "precompile": "rm -rf dist && npm run lint:css",
     "compile": "rollup -c rollup.config.js",
     "compile:watch": "rollup -c rollup.config.js --watch",
-    "start": "http-server .",
+    "start": "http-server . --gzip",
     "prepare": "npm run compile"
   },
   "author": "Falk Hoppe",
