@@ -16,7 +16,8 @@
     "declaration": true,
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
-    "outDir": "./dist/es"
+    "outDir": "./dist/es",
+    "removeComments": true
   },
   "include": [
     // whatever paths you intend to lint

@@ -1,5 +1,7 @@
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
+import { terser } from "rollup-plugin-terser";
+import gzipPlugin from 'rollup-plugin-gzip'
 
 export default {
   input: './garganttua.ts',
@@ -22,5 +24,9 @@ export default {
       }
     }
   ],
-  plugins: [typescript({ tsconfig: 'tsconfig.json' }), nodeResolve()]
+  plugins: [
+    typescript({ tsconfig: 'tsconfig.json' }),
+    nodeResolve(),
+    terser(),
+    gzipPlugin()]
 };
