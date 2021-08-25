@@ -15,14 +15,16 @@ const dateToGridStartCol = (date: Date, startDate: Date, rangeLength: number):nu
 
 const dateToGridEndCol = (date: Date, endDate: Date, rangeLength: number):number => {
   const dateDifference = differenceInDays(endDate, date)
+  console.log(dateDifference)
 
-  if (dateDifference < 0) {
+  if (dateDifference <= 0) { // date is later then largest date in grid, so we show it until the end
     return rangeLength
-  } else if (dateDifference > rangeLength) {
-    return 0
+  } else if (dateDifference < rangeLength) { // date is dateDifference away from the grid end
+    return rangeLength - dateDifference
   }
 
-  return dateDifference
+  // date is earlier then earliest date in grid, so we show it from col 0
+  return 0
 }
 
 export class TaskScheduleElement extends HTMLElement {
@@ -30,24 +32,30 @@ export class TaskScheduleElement extends HTMLElement {
   task?:Task
   private _startDate?: string | Date
   private _endDate?: string | Date
+  private _start?: number
+  private _end?: number
 
   connectedCallback (): void {
     this.ganttChart = this.closest('garganttua-gantt-chart') as GanttChartElement
 
     this.provideConfigAsCSSProps()
+    console.log(this.task?.description, this.endDate, this.end)
   }
 
   provideConfigAsCSSProps (): void {
     if (this.start !== null && this.end !== null) {
       this.style.setProperty('--schedule-start', (this.start + 2).toString())
-      this.style.setProperty('--schedule-end', (this.end + 2).toString())
+      this.style.setProperty('--schedule-end', (this.end).toString())
     }
   }
 
   get start (): number {
-    if (this.startDate) {
+    if (this._start || this._start === 0) {
+      return this._start
+    } else if (this.startDate) {
       if (this.ganttChart?.start && this.ganttChart?.end) {
-        return dateToGridStartCol(this.startDate as Date, this.ganttChart.start, this.ganttChart.columnCount)
+        this._start = dateToGridStartCol(this.startDate as Date, this.ganttChart.start, this.ganttChart.columnCount)
+        return this._start
       }
 
       throw new Error('no start/end for gantt-chart defined')
@@ -57,9 +65,12 @@ export class TaskScheduleElement extends HTMLElement {
   }
 
   get end (): number {
-    if (this.endDate) {
+    if (this._end || this._end === 0) {
+      return this._end
+    } else if (this.endDate) {
       if (this.ganttChart?.start && this.ganttChart?.end) {
-        return dateToGridEndCol(this.endDate as Date, this.ganttChart.end, this.ganttChart.columnCount)
+        this._end = dateToGridEndCol(this.endDate as Date, this.ganttChart.end, this.ganttChart.columnCount)
+        return this._end
       }
 
       throw new Error('no start/end for gantt-chart defined')
@@ -82,11 +93,15 @@ export class TaskScheduleElement extends HTMLElement {
   }
 
   get endDate (): string | Date {
-    if (!this._endDate && this.hasAttribute('end')) {
+    if (this._endDate) {
+      return this._endDate
+    } else if (this.hasAttribute('end')) {
       this._endDate = parseISO(this.getAttribute('end') as string)
+    } else {
+      throw new Error('schedule has no end-date')
     }
 
-    return this._endDate as Date
+    return this._endDate
   }
 
   set endDate (unparsed: string | Date) {
