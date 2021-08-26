@@ -4,7 +4,8 @@
     "description": "Some Task",
     "start": "2020-12-02",
     "end": "2021-02-20",
-    "content": "CiAgU29tZSBNb3JlIFRhc2sgRGV0YWlsczogKFByaW8gMSkuCiAgPGJyPjxicj4KICBNb3JlIGluZm9ybWF0aW9uIGNhbiBiZSBmb3VuZCA8YSBocmVmPSIjIj5oZXJlPC9hPgo="
+    "content": "CiAgU29tZSBNb3JlIFRhc2sgRGV0YWlsczogKFByaW8gMSkuCiAgPGJyPjxicj4KICBNb3JlIGluZm9ybWF0aW9uIGNhbiBiZSBmb3VuZCA8YSBocmVmPSIjIj5oZXJlPC9hPgo=",
+    "state": "is-finished"
   },
   {
     "type": "group",
@@ -14,13 +15,15 @@
         "type": "task",
         "description": "A Sub Task",
         "start": "2020-02-12",
-        "end": "2021-03-15"
+        "end": "2021-03-15",
+        "state": "is-finished"
       },
       {
         "type": "task",
         "description": "Another Sub Task",
         "start": "2021-01-05",
-        "end": "2021-01-20"
+        "end": "2021-01-20",
+        "state": "has-started"
       },
       {
         "type": "group",

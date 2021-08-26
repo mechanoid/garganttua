@@ -3,7 +3,7 @@ import differenceInDays from 'date-fns/differenceInDays'
 import formatISO from 'date-fns/formatISO'
 
 import { GanttChartElement } from './gantt-chart-element.js'
-import { Task } from './task-list.js'
+import { Task, stateValidation } from './task-list.js'
 import { TaskScheduleContentElement } from './task-schedule-content-element.js'
 
 const dateToGridStartCol = (date: Date, startDate: Date, rangeLength: number):number => {
@@ -37,10 +37,15 @@ export class TaskScheduleElement extends HTMLElement {
   private _endDate?: string | Date
   private _start?: number
   private _end?: number
+  private _state?: string
   content?: TaskScheduleContentElement
 
   connectedCallback (): void {
     this.ganttChart = this.closest('garganttua-gantt-chart') as GanttChartElement
+
+    if (this.hasAttribute('state')) {
+      this.state = this.getAttribute('state') as string
+    }
 
     if (this.task?.content) {
       this.content = TaskScheduleContentElement.build(this.task)
@@ -55,6 +60,11 @@ export class TaskScheduleElement extends HTMLElement {
     if (this.start !== null && this.end !== null) {
       this.style.setProperty('--schedule-start', (this.start + 2).toString())
       this.style.setProperty('--schedule-end', (this.end).toString())
+    }
+
+    if (this.state) {
+      this.style.setProperty('background-color', `var(--task-state-${this.state}-bg, var(--task-schedule-base-bg-col))`)
+      this.style.setProperty('color', `var(--task-state-${this.state}-ft, inherit)`)
     }
   }
 
@@ -116,6 +126,22 @@ export class TaskScheduleElement extends HTMLElement {
   set endDate (unparsed: string | Date) {
     this._endDate = (unparsed instanceof Date) ? unparsed : parseISO(unparsed)
     this.setAttribute('end', formatISO(this._endDate, { representation: 'date' }))
+  }
+
+  get state (): string {
+    return this._state || ''
+  }
+
+  set state (state: string) {
+    if (state) {
+      const parsed = stateValidation.parse(state) as string
+
+      if (parsed) {
+        this._state = parsed
+        this.setAttribute('state', this._state)
+        this.classList.add(`state-${this._state}`)
+      }
+    }
   }
 
   static build (task: Task): TaskScheduleElement {

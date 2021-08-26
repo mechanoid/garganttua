@@ -37,8 +37,10 @@ export class GanttChartElement extends HTMLElement {
 
     if (this.src) {
       this.appendChild(this.loader)
-      this.tasks = await load(this.src)
-      this.loader.remove()
+
+      this.tasks = await load(this.src).finally(() => {
+        this.loader.remove()
+      })
 
       if (this.tasks.length > 0) {
         this.taskList = TaskListElement.build(this.tasks)

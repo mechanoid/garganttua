@@ -9,6 +9,15 @@
 
     <script src="//unpkg.com/@ungap/custom-elements/es.js" defer></script>
     <script src="../dist/iife/garganttua.js" type="module"></script>
+
+    <style>
+      :root {
+        --task-state-is-finished-bg: rgb(123, 125, 123);
+        --task-state-is-finished-ft: rgb(255, 255, 255);
+        --task-state-has-started-bg: rgb(115, 233, 115);
+        --task-state-has-started-ft: rgb(0, 0, 0);
+      }
+    </style>
   </head>
   <body>
     <h1>Garganttua Chart Demo</h1>
@@ -16,7 +25,7 @@
     <garganttua-gantt-chart start="2020-12-01" end="2021-03-15">
       <ul is="garganttua-task-list">
         <li is="garganttua-task-list-item">
-          <garganttua-task>
+          <garganttua-task state="is-finished">
             <p is="garganttua-task-description">Some Task</p>
             <garganttua-task-schedule class="has-content" start="2020-12-05" end="2020-12-10">
               <garganttua-task-schedule-content>
@@ -34,13 +43,13 @@
           </garganttua-task>
           <ul is="garganttua-task-list">
             <li is="garganttua-task-list-item">
-              <garganttua-task>
+              <garganttua-task state="is-finished">
                 <p is="garganttua-task-description">A Sub Task</p>
                 <garganttua-task-schedule start="2021-01-15" end="2021-04-30"></garganttua-task-schedule>
               </garganttua-task>
             </li>
             <li is="garganttua-task-list-item">
-              <garganttua-task>
+              <garganttua-task state="has-started">
                 <p is="garganttua-task-description">Another Sub Task</p>
                 <garganttua-task-schedule start="2021-01-05" end="2021-01-20"></garganttua-task-schedule>
               </garganttua-task>
@@ -88,8 +97,3 @@
     </garganttua-gantt-chart>
   </body>
 </html>
-
-<!-- Open ToDos: -->
-<!-- TODO: allow different task states
-      Resulting in:
-        * different colors for the schedules -->
