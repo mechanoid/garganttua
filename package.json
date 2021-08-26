@@ -62,9 +62,5 @@
     "stylelint-config-standard": "^22.0.0",
     "typescript": "^4.3.5",
     "zod": "^3.8.1"
-  },
-  "bundledDependencies": [
-    "date-fns",
-    "zod"
-  ]
+  }
 }
