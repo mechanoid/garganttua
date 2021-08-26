@@ -36,7 +36,6 @@
   "email": "falk@hey.com",
   "license": "MIT",
   "files": [
-    "demo/*",
     "dist/*",
     "lib/*",
     "garganttua.css",

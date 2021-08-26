@@ -1,0 +1,10 @@
+.DS_Store
+node_modules/
+tmp/
+env.yaml
+dist/
+tsbuild/
+package-lock.json
+demo/
+README.md
+node_modules/
