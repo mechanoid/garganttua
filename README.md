@@ -12,7 +12,6 @@ A simplified Gantt-Chart representation tool for the browser, leveraging the pow
 
 In the demo directory you find some examples on how to use this library. The recommended way is
 to use the library to load a JSON file from the server, containing all tasks to display in the Gantt-chart.
-If you need to, you can also render the desired HTML directly on server side.
 
 ```
 <script src="../dist/iife/garganttua.js" type="module" async></script>
@@ -23,9 +22,9 @@ If you need to, you can also render the desired HTML directly on server side.
 
 The `garganttua-gantt-chart` custom element has some attributes you have to provide as configuration:
 
-* `src` - needs to be provided, when the markup is not provided on server-side. See "JSON data reference" for the format.
-* `start` - this reflects the start of the window for the Gantt chart. Tasks will be arranged related to the start and end date of the chart
-* `end` - this reflects the end of the window for the Gantt chart. Tasks will be arranged related to the start and end date of the chart
+* `src` - **Required.** See "JSON data reference" for the format.
+* `start` - **Required.** this reflects the start of the window for the Gantt chart. Tasks will be arranged related to the start and end date of the chart
+* `end` - **Required.** this reflects the end of the window for the Gantt chart. Tasks will be arranged related to the start and end date of the chart
 * `groups` - add "collapsable" as `groups` attribute if you want to have the sub groups hidden initially. Toggle Buttons to toggle the visibility are attached automatically.
 
 
