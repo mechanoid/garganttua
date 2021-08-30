@@ -5,7 +5,8 @@ export interface Task {
   description: string
   start?: string
   end?: string,
-  content?: string
+  content?: string,
+  state?: string
 }
 
 export interface TaskGroup {
@@ -17,14 +18,20 @@ export interface TaskGroup {
 export type TaskList = Array<Task|TaskGroup>
 
 const dateFormat = /^\d\d\d\d-\d\d-\d\d$/
-const dateFormatErrorMessage = 'the task date format needs to be YYYY-mm-dd'
+const dateFormatErrorMessage = 'the task date needs to be in the format of YYYY-mm-dd.'
+
+const stateFormat = /^[a-z-_]+$/
+const stateFormatErrorMessage = 'the state format can contain characters from a-z, dashes or underscores.'
+
+export const stateValidation = z.string().regex(stateFormat, stateFormatErrorMessage).optional()
 
 const Task: z.ZodSchema<Task> = z.object({
   type: z.literal('task'),
   description: z.string(),
   start: z.string().regex(dateFormat, dateFormatErrorMessage).optional(),
   end: z.string().regex(dateFormat, dateFormatErrorMessage).optional(),
-  content: z.string().optional()
+  content: z.string().optional(),
+  state: stateValidation
 })
 
 const TaskGroup: z.ZodSchema<TaskGroup> = z.lazy(() =>

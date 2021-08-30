@@ -1,4 +1,4 @@
-import { Task } from './task-list.js'
+import { Task, stateValidation } from './task-list.js'
 import { TaskScheduleElement } from './task-schedule-element.js'
 
 const buildTaskDescription = (text: string): HTMLParagraphElement => {
@@ -11,6 +11,36 @@ const buildTaskDescription = (text: string): HTMLParagraphElement => {
 
 export class TaskElement extends HTMLElement {
   task?: Task
+  schedule?: TaskScheduleElement
+  private _state?: string
+
+  connectedCallback (): void {
+    const schedule = this.querySelector('garganttua-task-schedule') as TaskScheduleElement
+
+    if (schedule) {
+      this.schedule = schedule
+    }
+
+    if (this.task?.state && this.schedule) {
+      this.state = this.task.state
+      this.schedule.state = this.state
+    }
+  }
+
+  get state (): string | undefined {
+    return this._state
+  }
+
+  set state (state: string | undefined | null) {
+    if (state) {
+      const parsed = stateValidation.parse(state)
+
+      if (parsed) {
+        this._state = parsed
+        this.setAttribute('state', parsed)
+      }
+    }
+  }
 
   static build (task: Task): TaskElement {
     const element = document.createElement('garganttua-task') as TaskElement
@@ -20,6 +50,7 @@ export class TaskElement extends HTMLElement {
 
     if (task.start && task.end) {
       const schedule = TaskScheduleElement.build(task)
+      element.schedule = schedule
       element.appendChild(schedule)
     }
 

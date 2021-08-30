@@ -5,7 +5,7 @@
   --task-description-max-width: 25rem;
 
   /* task schedule */
-  --task-schedule-bg-col: rgb(102, 125, 140);
+  --task-schedule-base-bg-col: rgb(102, 125, 140);
   --task-schedule-border-radius: 3px;
   --task-schedule-col-width: 1rem;
   --task-schedule-height: 2rem;
@@ -65,7 +65,7 @@ garganttua-task,
 }
 
 garganttua-task-schedule {
-  background-color: var(--task-schedule-bg-col);
+  background-color: var(--task-schedule-base-bg-col);
   border-radius: var(--task-schedule-border-radius);
   grid-column-start: var(--schedule-start);
   grid-column-end: var(--schedule-end);
