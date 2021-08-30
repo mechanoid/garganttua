@@ -1,4 +1,4 @@
-import { z, ZodString } from 'zod'
+import { z } from 'zod'
 
 export interface Task {
   type: string

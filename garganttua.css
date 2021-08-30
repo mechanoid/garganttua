@@ -2,6 +2,7 @@
 :root {
   /* task description */
   --task-description-min-width: 15rem;
+  --task-description-max-width: 25rem;
 
   /* task schedule */
   --task-schedule-bg-col: rgb(102, 125, 140);
@@ -45,16 +46,17 @@ garganttua-task,
 [is=garganttua-timeline] {
   display: grid;
   justify-items: stretch;
-  grid-template-columns: minmax(var(--task-description-min-width), 30rem) repeat(var(--grid-columns), var(--task-schedule-col-width));
+  grid-template-columns: minmax(var(--task-description-min-width), var(--task-description-max-width)) repeat(var(--grid-columns), var(--task-schedule-col-width));
   row-gap: var(--timeline-row-gap);
   align-items: stretch;
+  margin-bottom: var(--timeline-row-gap);
 }
 
 [is=garganttua-task-description] {
   margin: 0;
   padding-top: 0.5em;
   padding-right: 1em;
-  justify-self: right;
+  justify-self: left;
   align-self: start;
 }
 
@@ -108,6 +110,10 @@ garganttua-task-schedule.has-content:hover garganttua-task-schedule-content {
   Required Properties:
     --group-children-visibility: initial visibility of sub tasks (all visible or all hidden)
 */
+[is=garganttua-task-list] [is=garganttua-task-list] {
+  margin-left: 1rem;
+}
+
 [is=garganttua-task-group] [is=garganttua-task-list] {
   display: var(--group-children-display);
   visibility: var(--group-children-visibility);

@@ -53,6 +53,10 @@ tasks.json
 ]
 ```
 
+#### Properties
+
+##### `type`
+
 
 ## Development
 
