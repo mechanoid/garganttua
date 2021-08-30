@@ -45,7 +45,7 @@ export class TaskGroupElement extends HTMLLIElement {
     if (this.tasks) {
       this.nestedTasks = collectSubTasks(this.tasks)
       this.nestedTasks.forEach(task => {
-        const subTaskSchedule = TaskScheduleElement.build(task)
+        const subTaskSchedule = TaskScheduleElement.build(task, true)
         this.task?.appendChild(subTaskSchedule)
       })
     }

@@ -43,8 +43,8 @@ export class TaskScheduleElement extends HTMLElement {
   connectedCallback (): void {
     this.ganttChart = this.closest('garganttua-gantt-chart') as GanttChartElement
 
-    if (this.hasAttribute('state')) {
-      this.state = this.getAttribute('state') as string
+    if (this.task?.state) {
+      this.state = this.task?.state
     }
 
     if (this.task?.content) {
@@ -132,9 +132,11 @@ export class TaskScheduleElement extends HTMLElement {
     }
   }
 
-  static build (task: Task): TaskScheduleElement {
+  static build (task: Task, withoutContent: boolean): TaskScheduleElement {
     const element = document.createElement('garganttua-task-schedule') as TaskScheduleElement
-    element.task = task
+    const copy = Object.assign({}, task, { content: withoutContent ? null : task.content })
+    element.task = copy
+
     if (task.start) {
       element.startDate = task.start
     }
