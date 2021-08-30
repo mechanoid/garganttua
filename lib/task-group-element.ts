@@ -3,6 +3,16 @@ import { Task, TaskGroup, TaskList } from './task-list.js'
 import { TaskListElement } from './task-list-element.js'
 import { TaskElement } from './task-element.js'
 import { GanttChartElement } from './gantt-chart-element.js'
+import { TaskScheduleElement } from './task-schedule-element.js'
+
+const collectSubTasks = (tasks: TaskList, collection = []): Task[] => tasks.reduce((result: Task[], task: Task | TaskGroup) => {
+  if (task.type === 'task') {
+    result.push(task)
+  } else if (task.type === 'group' && (task as TaskGroup).tasks) {
+    return result.concat(collectSubTasks((task as TaskGroup).tasks))
+  }
+  return result
+}, collection)
 
 export class TaskGroupElement extends HTMLLIElement {
   ganttChart?: GanttChartElement
@@ -11,6 +21,7 @@ export class TaskGroupElement extends HTMLLIElement {
   subList: TaskListElement | null
   nestedTaskGroups?: HTMLElement[]
   groupChildrenToggle?: ToggleElement
+  nestedTasks?: Task[]
 
   constructor () {
     super()
@@ -29,6 +40,14 @@ export class TaskGroupElement extends HTMLLIElement {
     // if groups are collapsable we add now the buttons to toggle the sub list visibility
     if (this.ganttChart.collapsable && !!this.task && !!this.subList) {
       this.attachToggles()
+    }
+
+    if (this.tasks) {
+      this.nestedTasks = collectSubTasks(this.tasks)
+      this.nestedTasks.forEach(task => {
+        const subTaskSchedule = TaskScheduleElement.build(task)
+        this.task?.appendChild(subTaskSchedule)
+      })
     }
   }
 

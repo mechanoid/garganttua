@@ -69,9 +69,14 @@ garganttua-task-schedule {
   grid-column-end: var(--schedule-end);
   height: var(--task-schedule-height);
   align-self: start;
+  grid-row: 1;
   overflow: hidden;
   transition: all 0.3s ease-in;
   min-width: 0;
+}
+
+.is-group-task garganttua-task-schedule {
+  opacity: 0.5;
 }
 
 garganttua-task-schedule-content {
@@ -93,7 +98,7 @@ garganttua-task-schedule.has-content:hover garganttua-task-schedule-content {
   opacity: 1;
 }
 
-[is=garganttua-task-list-item] {
+[is=garganttua-task-list-item][is=garganttua-task-group] {
   margin-bottom: var(--task-gap);
 }
 
