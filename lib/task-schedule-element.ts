@@ -59,7 +59,7 @@ export class TaskScheduleElement extends HTMLElement {
   }
 
   get start (): number {
-    if (this._start || this._start === 0) {
+    if (this._start) {
       return this._start
     } else if (this.startDate) {
       if (this.ganttChart?.start && this.ganttChart?.end) {
@@ -74,7 +74,7 @@ export class TaskScheduleElement extends HTMLElement {
   }
 
   get end (): number {
-    if (this._end || this._end === 0) {
+    if (this._end) {
       return this._end
     } else if (this.endDate) {
       if (this.ganttChart?.start && this.ganttChart?.end) {
@@ -89,10 +89,6 @@ export class TaskScheduleElement extends HTMLElement {
   }
 
   get startDate (): string | Date {
-    if (!this._startDate && this.hasAttribute('start')) {
-      this._startDate = parseISO(this.getAttribute('start') as string)
-    }
-
     return this._startDate as Date
   }
 
@@ -102,15 +98,7 @@ export class TaskScheduleElement extends HTMLElement {
   }
 
   get endDate (): string | Date {
-    if (this._endDate) {
-      return this._endDate
-    } else if (this.hasAttribute('end')) {
-      this._endDate = parseISO(this.getAttribute('end') as string)
-    } else {
-      throw new Error('schedule has no end-date')
-    }
-
-    return this._endDate
+    return this._endDate as Date
   }
 
   set endDate (unparsed: string | Date) {
