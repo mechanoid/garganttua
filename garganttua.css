@@ -110,9 +110,10 @@ garganttua-task-schedule.has-content:hover garganttua-task-schedule-content {
   Required Properties:
     --group-children-visibility: initial visibility of sub tasks (all visible or all hidden)
 */
-[is=garganttua-task-list] [is=garganttua-task-list] {
-  margin-left: 1rem;
-}
+[is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-description] { padding-left: 1rem; }
+[is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-description] { padding-left: 2rem; }
+[is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-description] { padding-left: 3rem; }
+[is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-description] { padding-left: 4rem; }
 
 [is=garganttua-task-group] [is=garganttua-task-list] {
   display: var(--group-children-display);
