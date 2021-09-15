@@ -41,7 +41,9 @@ tasks.json
     description: "some string", // some short task description
     start?: "2021-01-01", // date formatted as ISO date string: yyyy-mm-dd
     end?: "2021-01-15", // date formatted as ISO date string: yyyy-mm-dd
-    content?: "SGVsbG8gV29ybGQh" // b64 encoded HTML or text
+    content?: "SGVsbG8gV29ybGQh" // b64 encoded HTML or text,
+    state?: string, // adds state classes to the task schedules, so they can be styled
+    link?: string // adds a link to the task description
   },
   ...
   {

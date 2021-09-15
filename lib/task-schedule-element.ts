@@ -132,7 +132,7 @@ export class TaskScheduleElement extends HTMLElement {
     }
   }
 
-  static build (task: Task, withoutContent: boolean): TaskScheduleElement {
+  static build (task: Task, withoutContent = null): TaskScheduleElement {
     const element = document.createElement('garganttua-task-schedule') as TaskScheduleElement
     const copy = Object.assign({}, task, { content: withoutContent ? null : task.content })
     element.task = copy

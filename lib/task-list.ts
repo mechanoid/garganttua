@@ -6,7 +6,8 @@ export interface Task {
   start?: string
   end?: string,
   content?: string,
-  state?: string
+  state?: string,
+  link?: string
 }
 
 export interface TaskGroup {
@@ -31,7 +32,8 @@ const Task: z.ZodSchema<Task> = z.object({
   start: z.string().regex(dateFormat, dateFormatErrorMessage).optional(),
   end: z.string().regex(dateFormat, dateFormatErrorMessage).optional(),
   content: z.string().optional(),
-  state: stateValidation
+  state: stateValidation,
+  link: z.string().url().optional()
 })
 
 const TaskGroup: z.ZodSchema<TaskGroup> = z.lazy(() =>

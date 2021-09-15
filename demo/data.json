@@ -5,7 +5,8 @@
     "start": "2020-12-02",
     "end": "2021-02-20",
     "content": "CiAgU29tZSBNb3JlIFRhc2sgRGV0YWlsczogKFByaW8gMSkuCiAgPGJyPjxicj4KICBNb3JlIGluZm9ybWF0aW9uIGNhbiBiZSBmb3VuZCA8YSBocmVmPSIjIj5oZXJlPC9hPgo=",
-    "state": "is-finished"
+    "state": "is-finished",
+    "link": "https://www.example.de/"
   },
   {
     "type": "group",
