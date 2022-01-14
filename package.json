@@ -1,6 +1,6 @@
 {
   "name": "garganttua",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "simple gantt charts based on css grid",
   "type": "module",
   "repository": {
