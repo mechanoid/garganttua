@@ -5,7 +5,7 @@
   --task-description-max-width: 25rem;
 
   /* task schedule */
-  --task-schedule-base-bg-col: rgb(102, 125, 140);
+  --task-schedule-base-bg-col: rgb(102 125 140);
   --task-schedule-border-radius: 3px;
   --task-schedule-col-width: 1rem;
   --task-schedule-height: 2rem;
@@ -43,16 +43,20 @@ garganttua-gantt-chart li {
     --schedule-end: defines the column for the schedule to end
 */
 garganttua-task,
-[is=garganttua-timeline] {
+[is="garganttua-timeline"] {
   display: grid;
   justify-items: stretch;
-  grid-template-columns: minmax(var(--task-description-min-width), var(--task-description-max-width)) repeat(var(--grid-columns), var(--task-schedule-col-width));
+  grid-template-columns:
+    minmax(
+      var(--task-description-min-width),
+      var(--task-description-max-width)
+    ) repeat(var(--grid-columns), var(--task-schedule-col-width));
   row-gap: var(--timeline-row-gap);
   align-items: stretch;
   margin-bottom: var(--timeline-row-gap);
 }
 
-[is=garganttua-task-description] {
+[is="garganttua-task-description"] {
   margin: 0;
   padding-top: 0.5em;
   padding-right: 1em;
@@ -60,15 +64,14 @@ garganttua-task,
   align-self: start;
 }
 
-.is-group-task [is=garganttua-task-description] {
+.is-group-task [is="garganttua-task-description"] {
   font-weight: bold;
 }
 
 garganttua-task-schedule {
   background-color: var(--task-schedule-base-bg-col);
   border-radius: var(--task-schedule-border-radius);
-  grid-column-start: var(--schedule-start);
-  grid-column-end: var(--schedule-end);
+  grid-column: var(--schedule-start) / var(--schedule-end);
   height: var(--task-schedule-height);
   align-self: start;
   grid-row: 1;
@@ -100,7 +103,7 @@ garganttua-task-schedule.has-content:hover garganttua-task-schedule-content {
   opacity: 1;
 }
 
-[is=garganttua-task-list-item][is=garganttua-task-group] {
+[is="garganttua-task-list-item"][is="garganttua-task-group"] {
   margin-bottom: var(--task-gap);
 }
 
@@ -110,21 +113,32 @@ garganttua-task-schedule.has-content:hover garganttua-task-schedule-content {
   Required Properties:
     --group-children-visibility: initial visibility of sub tasks (all visible or all hidden)
 */
-[is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-description] { padding-left: 1rem; }
-[is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-description] { padding-left: 2rem; }
-[is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-description] { padding-left: 3rem; }
-[is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-list] [is=garganttua-task-description] { padding-left: 4rem; }
+[is="garganttua-task-list"] [is="garganttua-task-list"] [is="garganttua-task-description"] { padding-left: 1rem; }
 
-[is=garganttua-task-group] [is=garganttua-task-list] {
+[is="garganttua-task-list"] [is="garganttua-task-list"] [is="garganttua-task-list"] [is="garganttua-task-description"] {
+  padding-left: 2rem;
+}
+
+/* stylelint-disable max-line-length */
+[is="garganttua-task-list"] [is="garganttua-task-list"] [is="garganttua-task-list"] [is="garganttua-task-list"] [is="garganttua-task-description"] {
+  padding-left: 3rem;
+}
+
+[is="garganttua-task-list"] [is="garganttua-task-list"] [is="garganttua-task-list"] [is="garganttua-task-list"] [is="garganttua-task-list"] [is="garganttua-task-description"] {
+  padding-left: 4rem;
+}
+/* stylelint-enable max-line-length */
+
+[is="garganttua-task-group"] [is="garganttua-task-list"] {
   display: var(--group-children-display);
   visibility: var(--group-children-visibility);
 }
 
-[is=garganttua-task-group] > garganttua-task + [is=garganttua-task-list] {
+[is="garganttua-task-group"] > garganttua-task + [is="garganttua-task-list"] {
   margin-top: var(--task-gap);
 }
 
-[is=garganttua-group-toggle] {
+[is="garganttua-group-toggle"] {
   margin-left: 1em;
   cursor: pointer;
   border: none;
@@ -132,7 +146,7 @@ garganttua-task-schedule.has-content:hover garganttua-task-schedule-content {
   text-decoration: underline;
 }
 
-[is=garganttua-group-toggle]:hover {
+[is="garganttua-group-toggle"]:hover {
   font-weight: bold;
 }
 
@@ -140,15 +154,14 @@ garganttua-task-schedule.has-content:hover garganttua-task-schedule-content {
   Gannt Timeline (generated in top of the list)
 */
 
-[is=garganttua-timeline] {
+[is="garganttua-timeline"] {
   font-size: var(--timeline-font-size);
   padding-bottom: var(--timeline-row-gap);
   margin-bottom: var(--timeline-row-gap);
 }
 
-[is=garganttua-timeline] li {
-  grid-column-start: var(--day-of-schedule);
-  grid-column-end: span var(--label-span, 1);
+[is="garganttua-timeline"] li {
+  grid-column: var(--day-of-schedule) / span var(--label-span, 1);
   grid-row: var(--label-row, 1);
 }
 
@@ -169,37 +182,32 @@ garganttua-task-schedule.has-content:hover garganttua-task-schedule-content {
   font-size: 10px;
   position: relative;
   text-indent: -9999em;
-  border-top: 1.1em solid rgba(0, 0, 0, 0.2);
-  border-right: 1.1em solid rgba(0, 0, 0, 0.2);
-  border-bottom: 1.1em solid rgba(0, 0, 0, 0.2);
-  border-left: 1.1em solid rgba(96, 96, 96, 0.6);
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
+  border-top: 1.1em solid rgb(0 0 0 / 20%);
+  border-right: 1.1em solid rgb(0 0 0 / 20%);
+  border-bottom: 1.1em solid rgb(0 0 0 / 20%);
+  border-left: 1.1em solid rgb(96 96 96 / 60%);
   transform: translateZ(0);
-  -webkit-animation: load8 1.1s infinite linear;
+  transform: translateZ(0);
+  transform: translateZ(0);
   animation: load8 1.1s infinite linear;
 }
 
-@-webkit-keyframes load8 {
+@keyframes load8 {
   0% {
-    -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
 
   100% {
-    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
 
 @keyframes load8 {
   0% {
-    -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
 
   100% {
-    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
