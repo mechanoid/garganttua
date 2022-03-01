@@ -16,7 +16,7 @@
   /* task list */
   --task-gap: 0.5em; /* defines the vertical gap between two tasks */
   --timeline-row-gap: 0.5em;
-  --timeline-font-size: 0.75em;
+  --timeline-font-size-default: 0.75em;
 }
 
 garganttua-gantt-chart {
@@ -155,7 +155,7 @@ garganttua-task-schedule.has-content:hover garganttua-task-schedule-content {
 */
 
 [is="garganttua-timeline"] {
-  font-size: var(--timeline-font-size);
+  font-size: var(--timeline-font-size, --timeline-font-size-default);
   padding-bottom: var(--timeline-row-gap);
   margin-bottom: var(--timeline-row-gap);
 }
